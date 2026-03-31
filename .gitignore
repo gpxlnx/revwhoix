@@ -1,0 +1,10 @@
+build/
+*.egg-info/
+
+# Local binaries
+revwhoix-go
+
+# Local input/output files
+keys.txt
+orgs.txt
+results.txt

@@ -1,64 +1,49 @@
-<h1 align="center">
-    revwhoix
-  <br>
-</h1>
+# revwhoix
 
-<h4 align="center">A simple utility to perform reverse WHOIS lookups using whoisxml API</h4>
+Reverse WHOIS lookup utility for the WhoisXML API.
 
+This repository now ships only with the Go CLI.
 
-<p align="center">
-  <a href="#install">🏗️ Install</a>  
-  <a href="#api-key-setup">📝 API Key Setup</a>  
-  <a href="#usage">⛏️ Usage</a> 
-  <br>
-</p>
+## Go CLI
 
+### Requirements
 
-# Install
+- Go 1.25+
+- One or more WhoisXML API keys with Reverse WHOIS / DRS credits
+
+### Build
+
 ```sh
-git clone https://github.com/Sybil-Scan/revwhoix
+git clone git@github.com:gpxlnx/revwhoix.git
 cd revwhoix
-pip install .
+go build -o revwhoix-go .
 ```
 
-# API Key Setup
+### API key file
 
-- Create an account at [main.whoisxmlapi.com](https://main.whoisxmlapi.com/).
-- Navigate to [user.whoisxmlapi.com/products](https://user.whoisxmlapi.com/products) and obtain API Key.
-- Paste the API key in `~/.config/whoisxml.conf` file.
-- And, we are all set. 
+Create a file with one API key per line:
 
+```txt
+api_key_1
+api_key_2
+api_key_3
+```
 
-# Usage
+### Usage
 
 ```sh
-(~) >>> revwhoix -k "Airbnb, Inc"
-
-                            __          _
-   ________ _   ___      __/ /_  ____  (_)  __
-  / ___/ _ \ | / / | /| / / __ \/ __ \/ / |/_/
- / /  /  __/ |/ /| |/ |/ / / / / /_/ / />  <
-/_/   \___/|___/ |__/|__/_/ /_/\____/_/_/|_|
-
-
-                             - by Sybil Scan Research <research@sybilscan.com>
-
-🚀 Performing reverse whois lookup on "Airbnb, Inc"
-🔍 Checking if domains exist
-✅ Domains exist
-⛏️ Fetching domains
-
-hoteltonight.us
-hotelstonight.info
-hoteltonight.at
-hotelstonight.us
-hoteltonight.in
-cybersource.com.do
-byairbnb.com
-airbnb-aws.com
-..............
-..............
-..............
-airbnb.com.pe
-airbnb.ae
+./revwhoix-go -k "Airbnb, Inc" -l keys.txt
+./revwhoix-go -kL orgs.txt -l keys.txt -o results.txt
+./revwhoix-go -k "target@example.com" -l keys.txt -silent | sort -u
 ```
+
+### Features
+
+- Multiple API keys with round-robin rotation
+- Automatic retry when a key returns `403`
+- Preview check before purchase requests
+- Pagination support for large result sets
+- Multiple keywords from file input
+- Global deduplication across all collected domains
+- Optional output file
+- Silent mode for pipeline-friendly output
