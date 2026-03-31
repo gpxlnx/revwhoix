@@ -26,7 +26,7 @@ const banner = `
 /_/   \___/|___/ |__/|__/_/ /_/\____/_/_/|_|  
 
               [Go Edition — Multi-API Round-Robin]
-              by Sybil Scan Research <research@sybilscan.com>
+              by gpxlnx <gpx0x53@proton.me>
 `
 
 // ─── User-Agent rotation ──────────────────────────────────────────────────────
